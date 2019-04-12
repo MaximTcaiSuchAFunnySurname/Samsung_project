@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         Button switchButton;
         ListView listView;
         List<String> list, listDeleted;
+        EditText editText;
+
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,14 @@ public class MainActivity extends AppCompatActivity {
                     buttonCTRL[0]++;
                 }
             });
-
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editText = (EditText) findViewById(R.id.edit_text);
+                    list.add(editText.getText().toString());
+                    regularList.notifyDataSetChanged();
+                    editText.setText("");
+                }
+            });
         }
     }
