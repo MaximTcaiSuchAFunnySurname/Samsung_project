@@ -13,13 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    Button editButton;
     Button add;
     Button switchButton;
     ListView listView;
-    List<String> list, listDeleted;
+    ArrayList<String> list, listDeleted;
     EditText editText;
 
 
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.list);
         switchButton = (Button) findViewById(R.id.switch_button);
+        list = new ArrayList<String>();
+        listDeleted = new ArrayList<String>();
         add = (Button) findViewById(R.id.add);
         final long[] buttonCTRL = {0};
         final ArrayAdapter<String> regularList = new ArrayAdapter<String>(this,
@@ -88,5 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 editText.setText("");
             }
         });
+
     }
+
 }
