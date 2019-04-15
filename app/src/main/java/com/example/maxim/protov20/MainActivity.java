@@ -12,8 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,12 +26,15 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> list, listDeleted;
     EditText editText;
-
+    String data;
+    HashMap<String, String> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Date time = new Date();
+        map = new HashMap<>();
         listView = (ListView) findViewById(R.id.list);
         switchButton = (Button) findViewById(R.id.switch_button);
         list = new ArrayList<String>();
@@ -88,11 +94,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 editText = (EditText) findViewById(R.id.edit_text);
                 list.add(editText.getText().toString());
+                map.put(editText.getText().toString(), Integer.toString(time.getDay()) + "/" +
+                 Integer.toString(time.getMonth()) + "/" + Integer.toString(time.getYear()));
                 regularList.notifyDataSetChanged();
                 editText.setText("");
             }
         });
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast toast = Toast.makeText(getApplicationContext(), "DATA: " + map.get(list.get(position))
+                        , Toast.LENGTH_LONG );
+                toast.show();
+                
+            }
+        });
     }
 
 }
