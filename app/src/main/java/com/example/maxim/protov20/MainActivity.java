@@ -106,7 +106,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), "DATA: " + map.get(list.get(position))
                         , Toast.LENGTH_LONG );
                 toast.show();
-                
+
+
+
+
             }
         });
     }
