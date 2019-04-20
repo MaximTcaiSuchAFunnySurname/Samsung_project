@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Date time = new Date();
+        final Calendar[] time = new Calendar[1];
         map = new HashMap<>();
         listView = (ListView) findViewById(R.id.list);
         switchButton = (Button) findViewById(R.id.switch_button);
@@ -92,10 +93,12 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                time[0] = Calendar.getInstance();
                 editText = (EditText) findViewById(R.id.edit_text);
                 list.add(editText.getText().toString());
-                map.put(editText.getText().toString(), Integer.toString(time.getDay()) + "/" +
-                 Integer.toString(time.getMonth()) + "/" + Integer.toString(time.getYear()));
+                map.put(editText.getText().toString(), Integer.toString(time[0].get(Calendar.DAY_OF_MONTH)) + "/" +
+                        Integer.toString(time[0].get(Calendar.MONTH)) + "/"
+                        + Integer.toString(time[0].get(Calendar.YEAR)));
                 regularList.notifyDataSetChanged();
                 editText.setText("");
             }
@@ -104,12 +107,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast toast = Toast.makeText(getApplicationContext(), "DATA: " + map.get(list.get(position))
-                        , Toast.LENGTH_LONG );
+                        , Toast.LENGTH_LONG);
                 toast.show();
-
-
-
-
             }
         });
     }
